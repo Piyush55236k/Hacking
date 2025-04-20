@@ -1,7 +1,23 @@
 console.log("Script is runnig");
 let container = document.querySelector(".container");
 let p = document.querySelector("p");
+const colorPalettes = [];
+for (let i = 0; i < 100; i++) {
+    const hue = i * 3.6; // Vary hue for 100 unique palettes
+    const palette = [
+        `hsl(${hue}, 100%, 50%)`, // Base color
+        `hsl(${(hue + 30) % 360}, 100%, 50%)`, // Secondary color
+        `hsl(${(hue + 60) % 360}, 100%, 50%)`, // Tertiary color
+        `hsl(${(hue + 120) % 360}, 100%, 50%)` // Complementary color
+    ];
+    colorPalettes.push(palette);
+}
 
+        function changeBackground() {
+            const randomPalette = colorPalettes[Math.floor(Math.random() * colorPalettes.length)];
+            const randomColor = randomPalette[Math.floor(Math.random() * randomPalette.length)];
+            document.body.style.backgroundColor = randomColor;
+        }
 
 async function main(){
     setInterval(() => {
@@ -30,6 +46,7 @@ let msg = ["Initializing Hacking",
     "Hacking your bank account",
     "Sending money to my account",
     "Done!"];
+
 const addItem = async (item) => {
     await randomDelay();
     let div = document.createElement("div");
@@ -41,3 +58,6 @@ for (const item of msg) {
 }}
 
 main();
+setInterval(() => {
+    changeBackground();
+}, 1000);
